@@ -4,7 +4,8 @@ import {ReduxRouter} from 'redux-router';
 import {reduxReactRouter, match} from 'redux-router/server';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import {Style} from 'radium';
+import Radium, {Style} from 'radium';
+import createLocation from 'history/lib/createLocation';
 
 import routes from '../../common/routes';
 import reducers from '../../common/reducers';
@@ -23,9 +24,10 @@ import renderFullPage from '../views';
 const ReactRouterServer = (req, res) => {
   const store = reduxReactRouter({routes})(createStore)(reducers);
   const initialState = store.getState();
+  const location = createLocation(req.url);
   const userAgent = req.headers['user-agent'];
 
-  store.dispatch(match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
+  store.dispatch(match(location, (error, redirectLocation, renderProps) => {
     if (!renderProps) {
       return res.status(404).end('Not found');
     }
@@ -36,7 +38,7 @@ const ReactRouterServer = (req, res) => {
 
     const componentHTML = renderToString(
       <Provider store={store}>
-        <RadiumWrapper radiumConfig={{userAgent: req.headers['user-agent']}}>
+        <RadiumWrapper radiumConfig={{userAgent: userAgent}}>
           <ReduxRouter/>
         </RadiumWrapper>
       </Provider>
