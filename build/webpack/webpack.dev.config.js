@@ -1,14 +1,12 @@
-import webpack from 'webpack';
-import baseConfig from './webpack.base.config.js';
+const webpack = require('webpack');
+const baseConfig = require('./webpack.base.config.js');
 
-const config = {...baseConfig, ...{
+const config = Object.assign({}, baseConfig, {
   devtool: 'eval-cheap-module-source-map',
   entry: [
-    ...baseConfig.entry,
     'webpack-hot-middleware/client'
   ],
   plugins: [
-    ...baseConfig.plugins,
     new webpack.DefinePlugin({
       __DEV__: true,
       __PROD__: false,
@@ -16,6 +14,6 @@ const config = {...baseConfig, ...{
     }),
     new webpack.HotModuleReplacementPlugin()
   ]
-}};
+});
 
-export default config;
+module.exports = config;
