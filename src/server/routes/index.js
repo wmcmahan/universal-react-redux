@@ -2,15 +2,13 @@ import React from 'react'
 import {renderToString} from 'react-dom/server';
 import {ReduxRouter} from 'redux-router';
 import {reduxReactRouter, match} from 'redux-router/server';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import Radium, {Style} from 'radium';
 import createLocation from 'history/lib/createLocation';
 
 import routes from '../../common/routes';
 import reducers from '../../common/reducers';
 import RadiumWrapper from '../../common/utils/RadiumWrapper';
-import StyleResets from '../../common/styles/theme/resets';
 
 import renderFullPage from '../views';
 
@@ -32,10 +30,6 @@ const ReactRouterServer = (req, res) => {
       return res.status(404).end('Not found');
     }
 
-    const styleReset = renderToString(
-      <Style rules={StyleResets}/>
-    );
-
     const componentHTML = renderToString(
       <Provider store={store}>
         <RadiumWrapper radiumConfig={{userAgent: userAgent}}>
@@ -44,7 +38,7 @@ const ReactRouterServer = (req, res) => {
       </Provider>
     );
 
-    res.send(renderFullPage(componentHTML, styleReset, initialState));
+    res.send(renderFullPage(componentHTML, initialState));
   }));
 };
 

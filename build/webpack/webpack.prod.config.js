@@ -12,9 +12,6 @@ module.exports = {
   resolve: {
     extensions: [
       ...baseConfig.resolve.extensions
-    ],
-    modulesDirectories: [
-      ...baseConfig.resolve.modulesDirectories
     ]
   },
   module: {

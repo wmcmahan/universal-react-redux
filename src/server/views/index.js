@@ -1,4 +1,6 @@
-const renderFullPage = (component, styles, initialState) => {
+const baseStyles = require('../../static/styles/main.css');
+
+const renderFullPage = (component, initialState) => {
   return `
     <!DOCTYPE html>
     <html>
@@ -7,7 +9,7 @@ const renderFullPage = (component, styles, initialState) => {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
         </script>
-        ${styles}
+        <style>${baseStyles}</style>
       </head>
       <body>
         <div id="app">${component}</div>

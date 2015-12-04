@@ -30,7 +30,7 @@ if (app.get('env') === 'development') {
   }));
   app.use(webpackHotMiddleware(compiler));
 } else {
-  app.use(express.static(path.join(__dirname, '../../dist/client')));
+  app.use('/static', express.static(path.join(__dirname, '../../dist/client')));
 }
 
 /**
