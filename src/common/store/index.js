@@ -12,7 +12,7 @@ export default function (initialState) {
       routes,
       createHistory
     })
-  )(createStore)(rootReducer);
+  )(createStore)(rootReducer, initialState);
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {

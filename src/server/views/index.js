@@ -1,4 +1,7 @@
-const baseStyles = require('../../static/styles/main.css');
+let baseStyles;
+if (process.env.NODE_ENV !== 'development') {
+  baseStyles = require('../../static/styles/main.css');
+}
 
 const renderFullPage = (component, initialState) => {
   return `
