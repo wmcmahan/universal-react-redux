@@ -1,4 +1,5 @@
 const path = require('path');
+const AssetsPlugin = require('assets-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -25,6 +26,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel'
+      },
+      {
+        test: /\.css$/,
+        loader: 'css?modules&sourceMap&localIdentName=[path][name]---[local]---[hash:base64:5]'
       }
     ]
   },

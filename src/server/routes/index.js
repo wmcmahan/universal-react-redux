@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {ReduxRouter} from 'redux-router';
 import {reduxReactRouter, match} from 'redux-router/server';

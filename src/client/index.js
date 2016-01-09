@@ -13,7 +13,7 @@ const store = configureStore(initialState);
 render(
   <Provider store={store}>
     <RadiumWrapper>
-      <ReduxRouter routes={routes}/>
+      <ReduxRouter/>
     </RadiumWrapper>
   </Provider>,
   document.getElementById('app')
