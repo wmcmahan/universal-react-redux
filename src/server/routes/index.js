@@ -5,6 +5,7 @@ import {reduxReactRouter, match} from 'redux-router/server';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import createLocation from 'history/lib/createLocation';
+import {createMemoryHistory} from 'history';
 
 import routes from '../../common/routes';
 import reducers from '../../common/reducers';
@@ -20,7 +21,10 @@ import renderFullPage from '../views';
  * @return react page view
  */
 const ReactRouterServer = (req, res) => {
-  const store = reduxReactRouter({routes})(createStore)(reducers);
+  const store = reduxReactRouter({
+    routes,
+    createHistory: createMemoryHistory
+  })(createStore)(reducers);
   const initialState = store.getState();
   const location = createLocation(req.url);
   const userAgent = req.headers['user-agent'];
